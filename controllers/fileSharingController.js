@@ -6,6 +6,7 @@ const { response } = require("express");
 exports.uploadFile = async (req, res) => {
   
   try {
+    console.log("File upload request received",req.file);
     /// 3 step to do
     // validate req
     // store file
@@ -32,8 +33,32 @@ exports.uploadFile = async (req, res) => {
     throw new Error(error);
   }
 };
+exports.showAllFiles = async (req, res) => {
+  try {
+    // Fetch all files from DB
+    const files = await fileSharing.find();
 
-exports.showFile = async (req, res) => {
+    // Map the files to include a full link
+    const filesWithLinks = files.map((file) => ({
+      filename: file.filename,
+      size: file.size,
+      uuid: file.uuid,
+      downloadLink: `${process.env.APP_BASE_URL}/files/download/${file.uuid}`,
+      viewLink: `${process.env.APP_BASE_URL}/files/${file.uuid}`
+    }));
+
+    res.json({
+      message: "Success",
+      total: files.length,
+      files: filesWithLinks
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong while fetching files" });
+  }
+};
+
+exports.showSingleFile = async (req, res) => {
   try {
     // first check wheter file of that params are available or not
     const file = await fileSharing.findOne({ uuid: req.params.uuid });

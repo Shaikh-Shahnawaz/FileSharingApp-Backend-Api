@@ -1,11 +1,11 @@
 
 
-const { showFile, downloadFile } = require('../controllers/fileSharingController')
+const { showSingleFile, downloadFile } = require('../controllers/fileSharingController')
 
 const router = require('express').Router()
 
 
-router.get('/:uuid',showFile)
+router.get('/:uuid',showSingleFile)
 router.get('/download/:uuid',downloadFile)
 
 

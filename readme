@@ -1,0 +1,6 @@
+
+
+Uploading file using postman
+
+1) select form-data then key name "myfile" and value select any file
+2) endpoint  is base_url + /api/filesharing/uploadfile
