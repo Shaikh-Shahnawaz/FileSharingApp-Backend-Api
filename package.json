@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "lint": "eslint .",
+    "test": "jest --runInBand",
     "start:dev": "nodemon server.js"
   },
   "repository": {
@@ -27,5 +28,12 @@
     "multer": "^2.0.2",
     "nodemon": "^3.1.10",
     "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "eslint": "^9.31.0",
+    "globals": "^16.3.0",
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4"
   }
 }
