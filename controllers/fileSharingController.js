@@ -1,7 +1,5 @@
 const fileSharing = require("../models/sharingAppModal");
-const { upload } = require("../utils/multer");
 const { v4: uuid4 } = require("uuid");
-const { response } = require("express");
 
 exports.uploadFile = async (req, res) => {
   
