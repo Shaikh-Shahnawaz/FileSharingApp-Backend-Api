@@ -22,18 +22,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Create uploads folder
+        run: mkdir -p uploads # ✅ Fix: create folder ignored by Git
+
       - name: Run Lint
         run: npm run lint
 
       - name: Run Tests
         env:
-          MONGO_URL: ${{ secrets.MONGO_URL }} # ✅ Use a test DB in secrets (optional)
+          MONGO_URL: ${{ secrets.MONGO_URL }} # ✅ Test DB in secrets
         run: npm test
 
   deploy:
     name: Deploy to EC2 (CD)
     runs-on: ubuntu-latest
-    needs: build-and-test # ✅ Only run if build-and-test passes
+    needs: build-and-test # ✅ Only run if CI passes
 
     steps:
       - name: Checkout the code
